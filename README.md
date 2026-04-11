@@ -37,7 +37,7 @@ LabEx is used as a **supplement** to TryHackMe and HTB Academy — not a replace
 ## Lab Progress
 
 ```
-Linux Fundamentals:    ███████░░░░░░░░░░░░░░░░░  3 / 10 labs completed  ← currently active
+Linux Fundamentals:    ████████████████░░░░░░░░  6 / 10 labs completed  ← currently active
 Security+ Prep:        ░░░░░░░░░░░░░░░░░░░░░░░░  0 labs completed
 Network Security:      ░░░░░░░░░░░░░░░░░░░░░░░░  0 labs completed
 Cybersecurity Basics:  ░░░░░░░░░░░░░░░░░░░░░░░░  0 labs completed
@@ -48,7 +48,7 @@ Cybersecurity Basics:  ░░░░░░░░░░░░░░░░░░░
 **Quick Start with Linux** — Linux Skill Tree  
 A beginner's guide for Linux aimed at those new to the system and looking to begin promptly. By completing ten labs, you will grasp the basics of Linux, enabling you to perform fundamental tasks with ease.
 
-`███████░░░░░░░░░░░░░░░░░` 3 / 10 labs completed
+`████████████████░░░░░░░░` 6 / 10 labs completed
 
 ### Completed ✅
 
@@ -57,19 +57,19 @@ A beginner's guide for Linux aimed at those new to the system and looking to beg
 | 1 | Your First Linux Lab | Quick Start with Linux | 🐧 Linux | Linux environment setup, terminal basics, navigating the shell | [Notes](labs/linux/your-first-linux-lab.md) |
 | 2 | Display User and Group Information | Quick Start with Linux | 🐧 Linux | `whoami`, `id`, `groups`, user/group management concepts | [Notes](labs/linux/display-user-and-group-information.md) |
 | 3 | Basic File Operations | Quick Start with Linux | 🐧 Linux | `ls`, `cp`, `mv`, `rm`, `touch`, file and directory management | [Notes](labs/linux/basic-file-operations.md) |
+| 4 | Files and Directories | Quick Start with Linux | 🐧 Linux | `tree`, `file`, wildcards, `find`, hidden files, SUID detection | [Notes](labs/linux/files-and-directories.md) |
+| 5 | File Contents and Comparing | Quick Start with Linux | 🐧 Linux | `cat`, `less`, `head`, `tail -f`, `grep`, `diff`, `wc` | [Notes](labs/linux/file-contents-and-comparing.md) |
+| 6 | The Manuscript Mystery | Quick Start with Linux | 🐧 Linux | Scenario-based investigation, command chaining, filesystem exploration | [Notes](labs/linux/the-manuscript-mystery.md) |
 
 ### Up Next 🔜
 
 #### Linux Fundamentals — Quick Start with Linux (in progress)
 | Lab | Category |
 |-----|----------|
-| Environment Variables and Path | 🐧 Linux |
 | File Permissions and Ownership | 🐧 Linux |
 | User and Group Management | 🐧 Linux |
 | Process Management Basics | 🐧 Linux |
-| Text Processing with grep and sed | 🐧 Linux |
 | Shell Scripting Basics | 🐧 Linux |
-| Package Management with APT | 🐧 Linux |
 
 #### Linux Fundamentals — Next Courses
 | Lab | Category |
@@ -108,9 +108,13 @@ A beginner's guide for Linux aimed at those new to the system and looking to beg
 
 ### 🐧 Linux
 - Terminal navigation and file system operations
-- User management and permissions
-- Package installation and system updates
-- SSH, SCP, and secure remote access
+- User and group management — `whoami`, `id`, `groups`, `/etc/passwd`, `/etc/group`
+- File operations — creating, copying, moving, deleting files and directories
+- Directory exploration — `tree`, `file` type identification, hidden files, wildcards
+- File search — `find` by name, type, owner, modification time, and SUID permissions
+- File content reading — `cat`, `less`, `head`, `tail -f` for live log monitoring
+- Log analysis fundamentals — `grep` for pattern searching, `diff` for baseline comparison, `wc` for counting
+- Scenario-based investigation — methodical filesystem exploration combining all commands
 
 ### 🔐 Security+ Prep
 - Threat analysis and risk management frameworks
@@ -136,6 +140,27 @@ A beginner's guide for Linux aimed at those new to the system and looking to beg
 
 | Tool | Command | Purpose |
 |------|---------|---------|
+| `pwd` | `pwd` | Print current working directory |
+| `ls` | `ls -la` | List files including hidden with full details |
+| `cd` | `cd <path>` | Navigate the filesystem |
+| `whoami` | `whoami` | Display current logged-in username |
+| `id` | `id <user>` | Show UID, GID and all group memberships |
+| `groups` | `groups <user>` | List group memberships for a user |
+| `cat` | `cat -n <file>` | Print file contents with line numbers |
+| `touch` | `touch <filename>` | Create an empty file or update timestamps |
+| `mkdir` | `mkdir -p <path>` | Create directories including nested paths |
+| `cp` | `cp -r <src> <dest>` | Copy files or directories |
+| `mv` | `mv <src> <dest>` | Move or rename files and directories |
+| `rm` | `rm -rf <target>` | Delete files or directories permanently |
+| `tree` | `tree -L 2` | Visualize directory structure to a set depth |
+| `file` | `file <filename>` | Identify true file type from magic bytes |
+| `find` | `find <path> -name <pattern>` | Search for files by name, type, or attributes |
+| `less` | `less <file>` | Paginated file reading with search |
+| `head` | `head -N <file>` | Show first N lines of a file |
+| `tail` | `tail -f <file>` | Follow live log output in real time |
+| `grep` | `grep -in <pattern> <file>` | Search file contents for a pattern |
+| `diff` | `diff -u <file1> <file2>` | Compare two files and show differences |
+| `wc` | `wc -l <file>` | Count lines in a file |
 | `tcpdump` | `tcpdump -i eth0 -w capture.pcap` | Live packet capture for traffic analysis |
 | `tshark` | `tshark -r capture.pcap` | Command-line protocol analysis |
 | `nmap` | `nmap -sV <target>` | Network scanning and service detection |
@@ -148,15 +173,15 @@ A beginner's guide for Linux aimed at those new to the system and looking to beg
 ## How This Repo is Organized
 
 ```
-labex-writeups/
+labex-cybersecurity/
 │
 ├── README.md                        ← You are here
 │
-└── labs/
-    ├── linux/                       ← Linux fundamentals labs
+└── ├── linux-writeups/                       ← Linux fundamentals labs
     ├── security-plus/               ← Security+ prep labs
     ├── network-security/            ← Network analysis labs
     └── cybersecurity-basics/        ← Ethical hacking intro labs
+
 ```
 
 Each lab writeup includes:
