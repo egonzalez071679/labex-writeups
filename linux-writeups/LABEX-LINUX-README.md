@@ -4,7 +4,7 @@
 > **Skill Tree:** Linux  
 > **Course:** Quick Start with Linux  
 > **Difficulty:** Beginner  
-> **Progress:** 3 / 10 labs completed  
+> **Progress:** 6 / 10 labs completed  
 > **Course Link:** https://labex.io/learn/cybersecurity-engineer
 
 ---
@@ -266,3 +266,272 @@ rm -rf /tmp/old-evidence/        # Force delete without prompting — use carefu
 - [LabEx Linux Skill Tree](https://labex.io/learn/cybersecurity-engineer)
 - [Linux File Timestamps Explained](https://man7.org/linux/man-pages/man1/stat.1.html)
 - [MITRE ATT&CK — Masquerading (T1036)](https://attack.mitre.org/techniques/T1036/)
+
+---
+
+## Lab 4 — Files and Directories
+
+### Summary
+
+Deeper dive into Linux file and directory management. Covers listing directory trees, understanding file types, working with hidden files, and using wildcards to operate on multiple files at once — building the navigation confidence needed to move quickly through an unfamiliar system during an investigation.
+
+---
+
+### Key Concepts Learned
+
+- **`tree`** — Displays a directory structure visually as a branching tree
+- **`file`** — Identifies the type of a file regardless of its extension
+- **Hidden files** — Files starting with `.` are hidden from standard `ls` output; use `ls -a` to reveal them
+- **Wildcards** — `*` matches any characters; `?` matches a single character; used to operate on multiple files at once
+- **`find`** — Searches for files and directories by name, type, size, or modification time
+- **Absolute vs relative paths** — Absolute paths start from `/`; relative paths start from your current directory
+
+---
+
+### Notes & Walkthrough
+
+#### Task 1 — Visualizing Directory Structure
+
+```bash
+tree                        # Show full directory tree from current location
+tree -L 2                   # Limit depth to 2 levels
+tree /var/log               # Show tree of a specific path
+tree -a                     # Include hidden files in the tree
+```
+
+#### Task 2 — Identifying File Types
+
+```bash
+file notes.txt              # Identify file type
+file /bin/bash              # Shows: ELF 64-bit LSB executable
+file suspicious_binary      # Useful for identifying disguised malware files
+```
+
+**Key insight:** Attackers often rename executables with innocent-looking extensions (e.g. `document.pdf`). `file` reads the magic bytes in the file header — not the extension — revealing the true type.
+
+#### Task 3 — Working with Hidden Files
+
+```bash
+ls -a                       # Show all files including hidden ones
+ls -la                      # Show hidden files with full details
+ls -la /home/esteban/       # Check for hidden files in a user's home directory
+```
+
+#### Task 4 — Using Wildcards
+
+```bash
+ls *.log                    # List all .log files
+cp *.txt /tmp/backup/       # Copy all .txt files to backup
+rm temp_*                   # Delete all files starting with temp_
+ls file?.txt                # Match file1.txt, file2.txt but not file10.txt
+```
+
+#### Task 5 — Finding Files
+
+```bash
+find / -name "passwd"                    # Find a file by name from root
+find /var/log -name "*.log"              # Find all .log files in /var/log
+find /home -user esteban                 # Find all files owned by a user
+find /tmp -mtime -1                      # Files modified in the last 24 hours
+find / -perm -4000 2>/dev/null           # Find SUID binaries — privilege escalation check
+```
+
+---
+
+### Tools Used
+
+| Tool | Command | Purpose |
+|------|---------|---------|
+| `tree` | `tree -L 2` | Visualize directory structure to a set depth |
+| `file` | `file <filename>` | Identify true file type from magic bytes |
+| `ls` | `ls -la` | List all files including hidden with full details |
+| `find` | `find <path> -name <pattern>` | Search for files by name, type, or attributes |
+
+---
+
+### Takeaways
+
+- `file` is essential in malware triage — never trust a file extension; always verify the true type
+- `find / -mtime -1` quickly surfaces recently modified files during an active incident investigation
+- Hidden files (`.bash_history`, `.ssh/`, `.bashrc`) are prime artifacts in Linux forensics — always run `ls -la`
+- `find / -perm -4000` finds SUID binaries — a common privilege escalation vector attackers exploit
+
+---
+
+### References
+
+- [LabEx Linux Skill Tree](https://labex.io/learn/cybersecurity-engineer)
+- [Linux `find` command — man page](https://man7.org/linux/man-pages/man1/find.1.html)
+- [MITRE ATT&CK — Masquerading (T1036)](https://attack.mitre.org/techniques/T1036/)
+
+---
+
+## Lab 5 — File Contents and Comparing
+
+### Summary
+
+Covers reading, searching, and comparing file contents from the command line. Essential skills for log analysis and forensic investigation — the ability to quickly extract meaningful information from large text files without opening a GUI editor.
+
+---
+
+### Key Concepts Learned
+
+- **`cat`** — Prints the full contents of a file to the terminal
+- **`less`** — Opens a file for paginated reading; navigate with arrow keys, search with `/`
+- **`head` / `tail`** — Show the first or last N lines of a file; `tail -f` follows live output
+- **`grep`** — Searches file contents for a pattern; one of the most important tools in log analysis
+- **`diff`** — Compares two files line by line and shows what changed between them
+- **`wc`** — Counts lines, words, and characters in a file
+
+---
+
+### Notes & Walkthrough
+
+#### Task 1 — Reading File Contents
+
+```bash
+cat /etc/passwd                     # Print full file contents
+cat -n /var/log/syslog              # Print with line numbers
+less /var/log/auth.log              # Open large file for paginated reading
+                                    # Press / to search, q to quit
+head -20 /var/log/syslog            # Show first 20 lines
+tail -20 /var/log/syslog            # Show last 20 lines
+tail -f /var/log/auth.log           # Follow live log output in real time
+```
+
+#### Task 2 — Searching File Contents with grep
+
+```bash
+grep "Failed password" /var/log/auth.log        # Find failed login attempts
+grep -i "error" /var/log/syslog                 # Case-insensitive search
+grep -r "password" /etc/                        # Recursive search through a directory
+grep -n "sudo" /var/log/auth.log                # Show line numbers with matches
+grep -c "FAILED" /var/log/auth.log              # Count matching lines
+grep -v "INFO" /var/log/syslog                  # Show lines that do NOT match
+grep "Failed" /var/log/auth.log | grep "root"   # Chain greps to narrow results
+```
+
+**Key insight:** `grep "Failed password" /var/log/auth.log` is one of the first commands run during a brute-force investigation — it instantly surfaces all failed SSH login attempts.
+
+#### Task 3 — Comparing Files with diff
+
+```bash
+diff file1.txt file2.txt            # Show differences between two files
+diff -u file1.txt file2.txt         # Unified format — easier to read
+diff /etc/passwd /etc/passwd.bak    # Compare current config to a backup
+```
+
+**Key insight:** During incident response, `diff` is used to compare current system files against known-good baselines to detect unauthorized changes.
+
+#### Task 4 — Counting with wc
+
+```bash
+wc -l /var/log/auth.log             # Count total lines in a log file
+grep "Failed" /var/log/auth.log | wc -l   # Count failed login attempts
+```
+
+---
+
+### Tools Used
+
+| Tool | Command | Purpose |
+|------|---------|---------|
+| `cat` | `cat -n <file>` | Print file contents with line numbers |
+| `less` | `less <file>` | Paginated file reading with search |
+| `head` | `head -N <file>` | Show first N lines of a file |
+| `tail` | `tail -f <file>` | Show last lines; `-f` follows live output |
+| `grep` | `grep -in <pattern> <file>` | Search file contents for a pattern |
+| `diff` | `diff -u <file1> <file2>` | Compare two files and show differences |
+| `wc` | `wc -l <file>` | Count lines in a file |
+
+---
+
+### Takeaways
+
+- `tail -f` is how SOC analysts monitor logs in real time during an active incident — it streams new entries as they appear
+- `grep "Failed password" /var/log/auth.log` is a foundational IR command — surfaces brute-force attempts instantly
+- `diff` against a known-good baseline is a core file integrity checking technique used in DFIR investigations
+- Chaining `grep | wc -l` quickly quantifies the scale of an event — how many failed logins, how many error entries
+
+---
+
+### References
+
+- [LabEx Linux Skill Tree](https://labex.io/learn/cybersecurity-engineer)
+- [Linux `grep` command — man page](https://man7.org/linux/man-pages/man1/grep.1.html)
+- [MITRE ATT&CK — Log Enumeration (T1654)](https://attack.mitre.org/techniques/T1654/)
+
+---
+
+## Lab 6 — The Manuscript Mystery
+
+### Summary
+
+First hands-on challenge lab in the Quick Start with Linux course. Applies all skills from the previous five labs in a scenario-based investigation — navigating an unfamiliar filesystem, identifying files, reading and searching their contents, and piecing together clues to solve a mystery. Simulates the kind of exploratory, evidence-gathering work done during a real incident investigation.
+
+---
+
+### Key Concepts Learned
+
+- **Scenario-based investigation** — Applying navigation, file identification, and content searching skills together in a realistic workflow
+- **Command chaining** — Combining multiple commands with `|` to filter and extract information efficiently
+- **Methodical filesystem exploration** — Starting broad (`ls`, `tree`) then narrowing down (`find`, `grep`) to locate relevant files
+- **Reading unknown files** — Using `file` to identify type, then `cat` / `less` / `grep` to extract meaningful content
+
+---
+
+### Notes & Walkthrough
+
+#### Investigation Approach
+
+```bash
+# Step 1 — Orient yourself
+pwd && whoami && ls -la
+
+# Step 2 — Map the environment
+tree -L 3                           # Get a full picture of available directories
+
+# Step 3 — Find relevant files
+find . -name "*.txt" 2>/dev/null    # Search for text files
+find . -mtime -7                    # Recently modified files
+
+# Step 4 — Identify unknown files
+file *                              # Check true type of all files in directory
+
+# Step 5 — Read and search contents
+cat clue.txt                        # Read a specific file
+grep -r "manuscript" .              # Search all files for a keyword
+grep -i "author" *.txt              # Search for author references
+
+# Step 6 — Compare and correlate
+diff document_v1.txt document_v2.txt   # Find what changed between versions
+```
+
+---
+
+### Tools Used
+
+| Tool | Command | Purpose |
+|------|---------|---------|
+| `tree` | `tree -L 3` | Map the full directory structure |
+| `find` | `find . -name "*.txt"` | Locate files matching a pattern |
+| `file` | `file *` | Identify true type of all files |
+| `cat` | `cat <file>` | Read file contents |
+| `grep` | `grep -r <pattern> .` | Search recursively for a keyword |
+| `diff` | `diff <file1> <file2>` | Compare two versions of a file |
+
+---
+
+### Takeaways
+
+- Scenario-based labs are the best preparation for real IR work — following clues through a filesystem mirrors what analysts actually do during investigations
+- A methodical approach (orient → map → find → identify → read → correlate) prevents missing evidence that a rushed search would skip
+- Command chaining (`find | grep`, `cat | grep | wc -l`) dramatically speeds up evidence gathering in large filesystems
+- The skills from Labs 1–5 — navigation, user info, file operations, directory exploration, content reading — all came together here as a unified investigative workflow
+
+---
+
+### References
+
+- [LabEx Linux Skill Tree](https://labex.io/learn/cybersecurity-engineer)
+- [Linux Command Line — Full Reference](https://man7.org/linux/man-pages/)
