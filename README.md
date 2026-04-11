@@ -148,12 +148,11 @@ A beginner's guide for Linux aimed at those new to the system and looking to beg
 ## How This Repo is Organized
 
 ```
-labex-cybersecurity/
+labex-writeups/
 │
 ├── README.md                        ← You are here
 │
 └── labs/
-    ├── TEMPLATE.md                  ← Blank template for new lab notes
     ├── linux/                       ← Linux fundamentals labs
     ├── security-plus/               ← Security+ prep labs
     ├── network-security/            ← Network analysis labs
