@@ -533,5 +533,5 @@ diff document_v1.txt document_v2.txt   # Find what changed between versions
 
 ### References
 
-- [LabEx Linux Skill Tree](https://labex.io/learn/cybersecurity-engineer)
+- [LabEx Linux Skill Tree](https://labex.io/learn/linux)
 - [Linux Command Line — Full Reference](https://man7.org/linux/man-pages/)
