@@ -177,7 +177,7 @@ labex-cybersecurity/
 │
 ├── README.md                        ← You are here
 │
-└── ├── linux-writeups/                       ← Linux fundamentals labs
+└── ├── linux-writeups/              ← Linux fundamentals labs
     ├── security-plus/               ← Security+ prep labs
     ├── network-security/            ← Network analysis labs
     └── cybersecurity-basics/        ← Ethical hacking intro labs
