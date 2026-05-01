@@ -1,227 +1,102 @@
-# LabEx — Cybersecurity Labs
+# LabEx Writeups
 
-> Documenting my hands-on learning through LabEx as part of my career transition from **Project Management** to **IR/DFIR Analyst**.
+Hands-on lab writeups from [LabEx](https://labex.io) — part of my journey toward a SOC Analyst role on the Incident Response and Digital Forensics track.
 
-![Platform](https://img.shields.io/badge/Platform-LabEx-4A90D9?style=flat-square)
-![Focus](https://img.shields.io/badge/Focus-Linux%20%7C%20Security%2B%20Prep-green?style=flat-square)
-![Status](https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square)
+Each writeup documents what the lab covered, the commands exercised, and how the skills connect to defensive cybersecurity work.
 
 ---
 
-## What is LabEx?
+## About this portfolio
 
-LabEx is an AI-powered, hands-on learning platform that runs entirely in the browser — no VPN, no local setup required. It uses a strict "learn by doing" approach with interactive labs, automated step-by-step checks, and an AI assistant (Labby) for when you get stuck.
+These writeups are part of a broader self-study program targeting:
 
-It covers:
+**TryHackMe SEC0 → SEC1 → SAL1 → CompTIA Security+ → HTB CDSA → eLearnSecurity eCIR**
 
-- **Linux fundamentals** — terminal operations, file system, package management, SSH
-- **Network security** — traffic analysis with tcpdump and Wireshark, Snort IDS, packet inspection
-- **Cybersecurity basics** — ethical hacking intro, encryption, password security, web vulnerabilities
-- **Security+ prep** — threat analysis, risk management, cryptography, identity management, incident response
+LabEx hands-on labs reinforce the foundational Linux and networking skills that underpin every step of that path. They pair with reading from Todd Lammle's *CompTIA Network+ Study Guide* and TryHackMe rooms to build retention through theory → practice → documentation.
 
-LabEx is used as a **supplement** to TryHackMe and HTB Academy — not a replacement. It shines for Linux command practice and Security+ lab reinforcement.
+**Companion repositories:**
 
----
-
-## My Background & Goal
-
-| | |
-|---|---|
-| **Coming from** | Project Management |
-| **Target role** | IR/DFIR Analyst |
-| **Why LabEx** | Linux practice + Security+ hands-on lab reinforcement |
-| **Next step** | TryHackMe SOC Level 1 → Security+ → HTB CDSA → INE eCIR |
+- [tryhackme-writeups](https://github.com/egonzalez071679/tryhackme-writeups) — TryHackMe room writeups (SEC0, SEC1, SAL1)
 
 ---
 
-## Lab Progress
+## Writeup format
 
-```
-Linux Fundamentals:    ████████████████░░░░░░░░  6 / 10 labs completed  ← currently active
-Security+ Prep:        ░░░░░░░░░░░░░░░░░░░░░░░░  0 labs completed
-Network Security:      ░░░░░░░░░░░░░░░░░░░░░░░░  0 labs completed
-Cybersecurity Basics:  ░░░░░░░░░░░░░░░░░░░░░░░░  0 labs completed
-```
+Every writeup follows a consistent structure:
 
-### Currently Working On 🔥
+- **Summary** — what the lab covered in one paragraph
+- **Key Concepts Learned** — bulleted list of the core ideas
+- **Notes & Walkthrough** — task-by-task with commands and code blocks
+- **Tools Used** — table of CLI tools and their purpose
+- **Takeaways** — defender-focused observations (IR/DFIR relevance, MITRE ATT&CK mapping where applicable)
+- **References** — official lab link, man pages, MITRE references, related reading
 
-**Quick Start with Linux** — Linux Skill Tree  
-A beginner's guide for Linux aimed at those new to the system and looking to begin promptly. By completing ten labs, you will grasp the basics of Linux, enabling you to perform fundamental tasks with ease.
-
-`████████████████░░░░░░░░` 6 / 10 labs completed
-
-### Completed ✅
-
-| # | Lab | Course | Category | Key Skills | Notes |
-|---|-----|--------|----------|------------|-------|
-| 1 | Your First Linux Lab | Quick Start with Linux | 🐧 Linux | Linux environment setup, terminal basics, navigating the shell | [Notes](labs/linux/your-first-linux-lab.md) |
-| 2 | Display User and Group Information | Quick Start with Linux | 🐧 Linux | `whoami`, `id`, `groups`, user/group management concepts | [Notes](labs/linux/display-user-and-group-information.md) |
-| 3 | Basic File Operations | Quick Start with Linux | 🐧 Linux | `ls`, `cp`, `mv`, `rm`, `touch`, file and directory management | [Notes](labs/linux/basic-file-operations.md) |
-| 4 | Files and Directories | Quick Start with Linux | 🐧 Linux | `tree`, `file`, wildcards, `find`, hidden files, SUID detection | [Notes](labs/linux/files-and-directories.md) |
-| 5 | File Contents and Comparing | Quick Start with Linux | 🐧 Linux | `cat`, `less`, `head`, `tail -f`, `grep`, `diff`, `wc` | [Notes](labs/linux/file-contents-and-comparing.md) |
-| 6 | The Manuscript Mystery | Quick Start with Linux | 🐧 Linux | Scenario-based investigation, command chaining, filesystem exploration | [Notes](labs/linux/the-manuscript-mystery.md) |
-
-### Up Next 🔜
-
-#### Linux Fundamentals — Quick Start with Linux (in progress)
-| Lab | Category |
-|-----|----------|
-| File Permissions and Ownership | 🐧 Linux |
-| User and Group Management | 🐧 Linux |
-| Process Management Basics | 🐧 Linux |
-| Shell Scripting Basics | 🐧 Linux |
-
-#### Linux Fundamentals — Next Courses
-| Lab | Category |
-|-----|----------|
-| Linux Terminal Operations | 🐧 Linux |
-| Remote Access & Secure File Transfer (SSH/SCP) | 🐧 Linux |
-
-#### Security+ Prep
-| Lab | Category |
-|-----|----------|
-| Threat Analysis & Risk Management | 🔐 Security+ |
-| Network Security Fundamentals | 🔐 Security+ |
-| Identity & Access Management | 🔐 Security+ |
-| Cryptography Basics | 🔐 Security+ |
-| Incident Response Fundamentals | 🔐 Security+ |
-
-#### Network Security
-| Lab | Category |
-|-----|----------|
-| Network Traffic Analysis with tcpdump | 🌐 Networking |
-| Protocol Analysis with tshark | 🌐 Networking |
-| Intrusion Detection with Snort | 🌐 Networking |
-| Packet Capture with Wireshark | 🌐 Networking |
-
-#### Cybersecurity Basics
-| Lab | Category |
-|-----|----------|
-| Password Cracking Basics with Hydra | ⚔️ Ethical Hacking |
-| Network Scanning with Nmap | ⚔️ Ethical Hacking |
-| Basic Encryption with OpenSSL | 🔒 Cryptography |
-| Web Vulnerabilities Intro | 🌐 Web Security |
+A reusable [`TEMPLATE.md`](./TEMPLATE.md) is provided for new writeups.
 
 ---
 
-## Skills Being Built
+## Courses
 
-### 🐧 Linux
-- Terminal navigation and file system operations
-- User and group management — `whoami`, `id`, `groups`, `/etc/passwd`, `/etc/group`
-- File operations — creating, copying, moving, deleting files and directories
-- Directory exploration — `tree`, `file` type identification, hidden files, wildcards
-- File search — `find` by name, type, owner, modification time, and SUID permissions
-- File content reading — `cat`, `less`, `head`, `tail -f` for live log monitoring
-- Log analysis fundamentals — `grep` for pattern searching, `diff` for baseline comparison, `wc` for counting
-- Scenario-based investigation — methodical filesystem exploration combining all commands
+### Quick Start with Linux
 
-### 🔐 Security+ Prep
-- Threat analysis and risk management frameworks
-- Network security principles and controls
-- Identity and access management (IAM)
-- Cryptography — symmetric, asymmetric, hashing
-- Incident response fundamentals
+Foundational Linux CLI fluency — navigation, file operations, permissions, ownership, user/group management. 5 labs + 5 challenges.
 
-### 🌐 Network Security
-- Live packet capture and traffic analysis with `tcpdump`
-- Protocol-level inspection with `tshark`
-- Writing and deploying Snort IDS rules
-- PCAP file analysis for forensic investigations
+| # | Item | Type | Writeup |
+|---|------|------|---------|
+| 1 | Your First Linux Lab | Lab | — |
+| 2 | Display User and Group Information | Challenge | — |
+| 3 | Basic Files Operations | Lab | — |
+| 4 | Files and Directories | Challenge | — |
+| 5 | File Contents and Comparing | Lab | — |
+| 6 | The Manuscript Mystery | Challenge | — |
+| 7 | Permissions of Files | Lab | [permissions-of-files.md](./quick-start-with-linux/permissions-of-files.md) |
+| 8 | Change File Ownership | Challenge | — |
+| 9 | User Account Management | Lab | — |
+| 10 | The Joker's Trick | Challenge | — |
 
-### ⚔️ Ethical Hacking Basics
-- Password cracking techniques with `Hydra`
-- Network scanning and service discovery with `Nmap`
-- Web vulnerability introduction — SQLi, XSS, command injection
+### Linux for Noobs
 
----
+Standard introductory Linux track — broader coverage of file management, permissions, user administration, and search. 9 items completed; more remain.
 
-## Tools Introduced
+| # | Item | Type | Writeup |
+|---|------|------|---------|
+| 1 | Getting Started with Linux | Lab | — |
+| 2 | Create Personalized Terminal Greeting | Challenge | — |
+| 3 | Basic File Operations in Linux | Lab | — |
+| 4 | Get Help on Linux Commands | Lab | — |
+| 5 | Delete and Move Files | Challenge | — |
+| 6 | Linux User Group and File Permissions | Lab | — |
+| 7 | Add New User and Group | Challenge | — |
+| 8 | File and Directory Operations | Lab | — |
+| 9 | Find a File | Challenge | [find-a-file.md](./linux-for-noobs/find-a-file.md) |
 
-| Tool | Command | Purpose |
-|------|---------|---------|
-| `pwd` | `pwd` | Print current working directory |
-| `ls` | `ls -la` | List files including hidden with full details |
-| `cd` | `cd <path>` | Navigate the filesystem |
-| `whoami` | `whoami` | Display current logged-in username |
-| `id` | `id <user>` | Show UID, GID and all group memberships |
-| `groups` | `groups <user>` | List group memberships for a user |
-| `cat` | `cat -n <file>` | Print file contents with line numbers |
-| `touch` | `touch <filename>` | Create an empty file or update timestamps |
-| `mkdir` | `mkdir -p <path>` | Create directories including nested paths |
-| `cp` | `cp -r <src> <dest>` | Copy files or directories |
-| `mv` | `mv <src> <dest>` | Move or rename files and directories |
-| `rm` | `rm -rf <target>` | Delete files or directories permanently |
-| `tree` | `tree -L 2` | Visualize directory structure to a set depth |
-| `file` | `file <filename>` | Identify true file type from magic bytes |
-| `find` | `find <path> -name <pattern>` | Search for files by name, type, or attributes |
-| `less` | `less <file>` | Paginated file reading with search |
-| `head` | `head -N <file>` | Show first N lines of a file |
-| `tail` | `tail -f <file>` | Follow live log output in real time |
-| `grep` | `grep -in <pattern> <file>` | Search file contents for a pattern |
-| `diff` | `diff -u <file1> <file2>` | Compare two files and show differences |
-| `wc` | `wc -l <file>` | Count lines in a file |
-| `tcpdump` | `tcpdump -i eth0 -w capture.pcap` | Live packet capture for traffic analysis |
-| `tshark` | `tshark -r capture.pcap` | Command-line protocol analysis |
-| `nmap` | `nmap -sV <target>` | Network scanning and service detection |
-| `hydra` | `hydra -l user -P wordlist <target>` | Password cracking and brute-force testing |
-| `openssl` | `openssl enc -aes-256-cbc -in file` | Encryption and certificate operations |
-| `snort` | `snort -A console -c snort.conf` | Intrusion detection and rule-based alerting |
+### CompTIA Network+ Certification Training Labs
+
+Networking concepts hands-on, paired with Lammle textbook reading. In progress.
+
+| # | Item | Type | Writeup |
+|---|------|------|---------|
+| 1 | Identify MAC and IP Addresses in Linux | Lab | — |
+| 2 | Manage IP Addressing in Linux | Lab | — |
 
 ---
 
-## How This Repo is Organized
+## Progress
 
-```
-labex-cybersecurity/
-│
-├── README.md                        ← You are here
-│
-└── ├── linux-writeups/              ← Linux fundamentals labs
-    ├── security-plus/               ← Security+ prep labs
-    ├── network-security/            ← Network analysis labs
-    └── cybersecurity-basics/        ← Ethical hacking intro labs
-
-```
-
-Each lab writeup includes:
-- Summary of what the lab covers
-- Key concepts learned with explanations
-- Step-by-step notes and commands used
-- Tools table with actual syntax
-- Takeaways connecting the lab to IR/DFIR work
+- **Total items completed:** 21
+- **Writeups published:** 2
+- **Active courses:** 3
 
 ---
 
-## How LabEx Fits My Roadmap
+## License & Use
 
-LabEx plays two specific roles — Linux practice now, Security+ reinforcement later:
+Writeups are my own work and reflect my interpretation of LabEx course material. They are intended as study notes and a public record of skill development, not as official LabEx course solutions. Lab content, scenarios, and exact task descriptions belong to LabEx.
 
-| Phase | When | How LabEx Is Used |
-|-------|------|-------------------|
-| **Linux practice** | Now — alongside THM Pre-Security | Run Linux labs daily to build terminal muscle memory |
-| **Security+ reinforcement** | Month 4–6 — alongside THM SOC Level 1 | Use Security+ labs to ground theory in hands-on practice |
-
-> LabEx is a supplement, not a primary platform. TryHackMe and HTB Academy carry the main learning load.
+If you're studying the same material, feel free to use these as a reference — but doing the labs yourself is what builds the skill. There's no shortcut.
 
 ---
 
-## Broader Learning Roadmap
+## Contact
 
-This LabEx work supports Phase 1 and 2 of a structured 12–14 month plan:
-
-| Phase | Platform | Focus | Target Certification |
-|-------|----------|-------|----------------------|
-| **1** — Now | TryHackMe + LabEx | Pre-Security + Linux practice | SEC1 |
-| **2** — Month 4–6 | TryHackMe + LabEx + Self-study | SOC Level 1 + Security+ prep | SAL1 + Security+ |
-| **3** — Month 6–10 | HTB Academy | SOC Analyst Path + Sherlocks | CDSA |
-| **4** — Month 10–14 | INE | Incident Responder path | eCIR |
-
-> Network+ content is studied as background material (Professor Messer — free) without sitting the exam, to build networking foundations for Security+.
-
----
-
-## Connect
-
-- 🔗 LinkedIn: [linkedin.com/in/esteban-gonzalez-3400ab233](https://www.linkedin.com/in/esteban-gonzalez-3400ab233)
-- 💀 TryHackMe: [tryhackme.com/p/egonzalez.1679](https://tryhackme.com/p/egonzalez.1679)
+Esteban Gonzalez · [GitHub](https://github.com/egonzalez071679) · TryHackMe: `egonzalez.1679`
